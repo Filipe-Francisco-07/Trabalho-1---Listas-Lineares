@@ -30,7 +30,6 @@ public class Fila {
 		}
 	}
 	public void aterrissar1(Nodo Aviao) {
-
 		if(temEspaco()) {
 			//Nodo novo = new Nodo(ID);
 			if(estaVazio()) {
@@ -43,12 +42,12 @@ public class Fila {
 			
 			Random a = new Random();
 			int tempo_aviao = 0;
-			tempo_aviao = a.nextInt(10,100);
+			tempo_aviao = a.nextInt(1,20);
 			Aviao.setID(ID1);
-			Aviao.setTempo_restante(tempo_aviao);
+			Aviao.setTempo(tempo_aviao);
 			tamanho++;
 			ID1+=2;
-			System.out.println("Avião de ID: "+Aviao.getID()+" e Combustível: "+Aviao.getTempo_restante()+" entrou na fila de aterrissagem 1.");
+			System.out.println("Avião de ID: "+Aviao.getID()+" e Combustível: "+Aviao.getTempo()+" entrou na fila de aterrissagem 1.");
 		}else {
 			System.out.println("Fila cheia!");
 		}
@@ -67,12 +66,12 @@ public class Fila {
 			
 			Random a = new Random();
 			int tempo_aviao = 0;
-			tempo_aviao = a.nextInt(10,100);
+			tempo_aviao = a.nextInt(1,20);
 			Aviao.setID(ID1);
-			Aviao.setTempo_restante(tempo_aviao);
+			Aviao.setTempo(tempo_aviao);
 			tamanho++;
 			ID1+=2;
-			System.out.println("Avião de ID: "+Aviao.getID()+" e Combustível: "+Aviao.getTempo_restante()+" entrou na fila de aterrissagem 2.");
+			System.out.println("Avião de ID: "+Aviao.getID()+" e Combustível: "+Aviao.getTempo()+" entrou na fila de aterrissagem 2.");
 		}else {
 			System.out.println("Fila cheia!");
 		}
@@ -117,18 +116,115 @@ public class Fila {
 			System.out.println("Fila cheia!");
 		}
 	}
+	
 	public Integer remover() {
 		if(estaVazio()) {
 			return null;
 		}
-		int valor = inicio.getID();
+	
 		inicio = inicio.getProx();
 		tamanho--;
 		if(estaVazio()) {
 			fim = null;
 		}
-		return valor;
+		return 1;
+	}
+	
+	public void mostraListaA() {
+		if(estaVazio()) {
+			return;
+		}
+		Nodo aux = inicio;
+		while(aux != null) {
+			System.out.print("ID: "+ aux.getID()+" Combustivel: "+aux.getTempo()+" ");
+			aux = aux.getProx();
+		}
+		System.out.println();
+		
+	}
+	
+	public void mostraListaD() {
+		if(estaVazio()) {
+			return;
+		}
+		Nodo aux = inicio;
+		while(aux != null) {
+			System.out.print("ID: "+ aux.getID());
+			aux = aux.getProx();
+		}
+		System.out.println();
+		
+	}
+	
+	public void decolar() {
+		
+		if(inicio == null) return;
+		
+		if(inicio != null){
+				inicio = inicio.getProx();
+				System.out.println("Aviao decolou.");
+				return;
+			}
+		}
+	
+	public void aterrissarMenor() {
+
+		int menor = 100;
+	
+		if(inicio == null) return;
+		
+		Nodo aux = inicio;
+		Nodo aux2 = inicio;
+		while(aux != null) {
+			if(aux.getTempo() < menor) {
+				menor = aux.getTempo();
+				aux = aux.getProx();
+			}
+		}
+		if(inicio != null) {
+			if(inicio.getTempo()== menor) {
+				inicio = inicio.getProx();
+				System.out.println("Avião de menor combustível aterrissou.");				
+				return;
+			}
+		}
+		if(aux2 != null) {
+		while(aux2.getProx() != null) {
+			if(aux2.getProx().getTempo()==menor) {
+				aux2.setProx(aux2.getProx().getProx());
+				System.out.println("Avião de menor combustível aterrissou.");
+				return;
+			}
+			aux2 = aux2.getProx();
+		}
+		return;
+		}
 	}
 	
 	
+	/*
+	public void removerMenor(Fila fila) {
+		
+		Nodo aux = inicio;
+		Nodo meno = null;
+		
+		int menor = 21;
+		
+		while(aux.getProx() != null) {
+			if(aux.getTempo() < menor) {
+				menor = aux.getTempo();
+				meno = aux;
+			}
+			aux = aux.getProx();
+			
+		}
+		
+		while() 
+		
+
+		inicio = inicio.getProx();
+
+	}
+	
+	*/
 }
