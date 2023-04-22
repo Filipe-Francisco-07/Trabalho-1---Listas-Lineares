@@ -32,22 +32,22 @@ public class Pista {
 		}
 	}
 	public void entrarAterrissagem1(Nodo Aviao, Fila fila) {
-		tempo++;
 		fila.aterrissar1(Aviao);
+		return;
 	}
 	public void entrarAterrissagem2(Nodo Aviao, Fila fila) {
-		tempo++;
 		fila.aterrissar2(Aviao);
+		return;
 	}
 	
 	public void entrarDecolagem1(Nodo Aviao, Fila fila) {
-		tempo++;
 		fila.decolar1(Aviao);
+		return;
 	}
 	
 	public void entrarDecolagem2(Nodo Aviao, Fila fila) {
-		tempo++;
 		fila.decolar2(Aviao);
+		return;
 	}
 	
 	public Integer remover() {
