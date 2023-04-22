@@ -96,17 +96,16 @@ public class Fila {
 	}
 	
 	public Integer remover() {
-		if(estaVazio()) {
-			return null;
-		}
-	
-		inicio = inicio.getProx();
-		tamanho--;
-		if(estaVazio()) {
-			fim = null;
-		}
-		return 1;
-	}
+        if(estaVazio()) {
+            return null;
+        }
+        int valor = inicio.getID();
+        inicio = inicio.getProx();
+        if(estaVazio()) {
+            fim = null;
+        }
+        return valor;
+    }
 	
 	public void mostraListaA() {
 		Nodo aux = inicio;
@@ -166,19 +165,17 @@ public class Fila {
 		return;
 	}
 	
-	public boolean qntMenor() {
-	
-		int menor = 100;
-		
-		if(inicio == null) return false;
+	public boolean qntMenor() {	
+		int menor = 21;
 		
 		Nodo aux = inicio;
 		while(aux != null) {
 			if(aux.getTempo() < menor) {
 				menor = aux.getTempo();
-				aux = aux.getProx();
 			}
+			aux = aux.getProx();
 		}
+		
 		if(menor <= 5) {
 			return true;
 		}
@@ -192,31 +189,28 @@ public class Fila {
 		if(inicio == null) return;
 		
 		Nodo aux = inicio;
+				
 		while(aux != null) {
 			if(aux.getTempo() < menor) {
 				menor = aux.getTempo();
-				aux = aux.getProx();
 			}
-		}
-		aux = inicio;
-		if(inicio != null) {
-			if(inicio.getTempo()== menor) {
-				inicio = inicio.getProx();
-				System.out.println("Avião de menor combustível aterrissou.");				
-				return;
-			}
+			aux = aux.getProx();
 		}
 		aux = inicio;
 		
-		while(inicio.getProx() != null) {
-			if(inicio.getProx().getTempo()==menor) {
-				inicio.setProx(inicio.getProx().getProx());
+		if(aux.getTempo() == menor) {
+			aux = aux.getProx();	
+			return;
+		}
+
+		while(aux != null) {
+			if(aux.getProx().getTempo()==menor) {
+				aux.setProx(aux.getProx().getProx());
 				System.out.println("Avião de menor combustível aterrissou.");
 				return;
 			}
-			inicio = inicio.getProx();
+			aux = aux.getProx();
 		}
-		return;
 	}
 	
 }

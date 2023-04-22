@@ -11,6 +11,7 @@ public class Main {
 		Scanner input = new Scanner(System.in);
 				
 		int tempo = 0;
+		int desc_tempo = 0;
 		boolean vai = true;
 		
 		Pista Pista1 = new Pista();
@@ -31,22 +32,23 @@ public class Main {
 		int tempo_ar = 0;
 		// supondo que a reserva seja de 5 unidades de tempo.
 		int reserva = 0;
-	
+		
 		while (vai) {
 			choose++;
 			tempo++;
-			entrada = r.nextInt(1,2);
-			pista = r.nextInt(1,2);
-			tempo_ar = r.nextInt(1,20);
+			desc_tempo--;
+			
+			entrada = r.nextInt(0,3);
+			pista = r.nextInt(0,3);
 			
 			System.out.println("tempo: "+tempo);
 			
 			// criando de 0 a 2 entradas de aterrissagem.
 			for(int i = 0; i < entrada; i++) {
 				Nodo Aviao = new Nodo();
+				tempo_ar = 3;
 				Aviao.setID(ID1);
 				Aviao.setTempo(tempo_ar);
-				tempo_ar = r.nextInt(1,20);
 				ID1+=2;
 				if(pista == 1) {
 					Aterrissagem1.aterrissar1(Aviao);
@@ -55,8 +57,8 @@ public class Main {
 				}
 			}
 			
-			entrada = r.nextInt(1,3);
-			pista = r.nextInt(1,3);
+			entrada = r.nextInt(0,3);
+			pista = r.nextInt(0,3);
 			for(int i = 0; i < entrada; i++) {
 				Nodo Aviao = new Nodo();
 				Aviao.setID(ID2);
@@ -68,6 +70,8 @@ public class Main {
 				}
 			}
 			
+			System.out.println(choose);
+			
 			if(choose % 2 == 0) {
 				if(Aterrissagem1.qntMenor()) {
 					reserva++;
@@ -75,14 +79,17 @@ public class Main {
 				Aterrissagem1.aterrissarMenor();
 				Decolagem1.decolar();	
 			}else {
+				if(Aterrissagem2.qntMenor()) {
+					reserva++;
+				}
 				Aterrissagem2.aterrissarMenor();
 				Decolagem2.decolar();
 			}
 			
-			Aterrissagem1.mostraListaA();
-			Aterrissagem2.mostraListaA();
-			Decolagem1.mostraListaD();
-			Decolagem2.mostraListaD();
+			//Aterrissagem1.mostraListaA();
+			//Aterrissagem2.mostraListaA();
+			//Decolagem1.mostraListaD();
+			//Decolagem2.mostraListaD();
 			
 			System.out.println("Digite 1 para parar ou qualquer coisa para continuar. ");
 			int opt = input.nextInt();
@@ -100,7 +107,7 @@ public class Main {
 				vai = false;
 			}
 		}	
-	
+		
 		/*
 		Nodo Aviao1 = new Nodo();
 		Nodo Aviao2 = new Nodo();
