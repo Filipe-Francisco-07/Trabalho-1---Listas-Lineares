@@ -1,14 +1,11 @@
 package Aeroporto;
 
-import java.util.Random;
-
 public class Fila {
 	private Nodo inicio = null;
 	private Nodo fim;
-	private int limite = 20;
+	private int limite = 10;
 	private int tamanho = 0;
-	private int ID1 = 1;
-	private int ID2 = 2;
+
 	
 	public Fila() {
 	}
@@ -30,9 +27,13 @@ public class Fila {
 		}
 	}
 	
-	public void aterrissar(int ID, int tempo_ar) {
+	public int getTamanho() {
+		return tamanho;
+	}
+	
+	public void aterrissar(int ID, int tempo_ar, int tempo_entrada) {
 		if(temEspaco()) {
-			Nodo Aviao = new Nodo(ID, tempo_ar);
+			Nodo Aviao = new Nodo(ID, tempo_ar,tempo_entrada);
 			if(estaVazio()) {
 				inicio = Aviao;
 				fim = Aviao;
@@ -47,9 +48,9 @@ public class Fila {
 		}
 	}
 	
-	public void decolar(int ID) {
+	public void decolar(int ID, int tempo_entrada) {
 		if(temEspaco()) {
-			Nodo Aviao = new Nodo(ID);
+			Nodo Aviao = new Nodo(ID,tempo_entrada);
 			if(estaVazio()) {
 				inicio = Aviao;
 				fim = Aviao;
@@ -64,38 +65,31 @@ public class Fila {
 		}
 	}
 	
-	public Integer remover() {
-        if(estaVazio()) {
-            return null;
-        }
-        int valor = inicio.getID();
-        inicio = inicio.getProx();
-        if(estaVazio()) {
-            fim = null;
-        }
-        return valor;
-    }
-	
 	public void mostraListaA() {
-		Nodo aux = inicio;
-		while(aux != null) {
-			System.out.println("ID: "+ aux.getID()+" Combustivel: "+aux.getTempo()+" ");
-			aux = aux.getProx();
-		}
-		System.out.println();
-		return;
-		
+	    if (inicio == null) {
+	        System.out.println("A fila está vazia.");
+	        return;
+	    }
+	    
+	    Nodo atual = inicio;
+	    
+	    while (atual != null) {
+	        System.out.println("ID: "+atual.getID()+ " Combustível: "+atual.getTempo() );
+	        atual = atual.getProx();
+	    }
 	}
 	
 	public void mostraListaD() {
-		Nodo aux = inicio;
-		while(aux != null) {
-			System.out.println("ID: "+ aux.getID());
-			aux = aux.getProx();
+		if (inicio == null) {
+		    System.out.println("A fila está vazia.");
+		    return;
+		}    
+		Nodo atual = inicio;
+		    
+		while (atual != null) {
+		    System.out.println("ID: "+atual.getID());
+		    atual = atual.getProx();
 		}
-		System.out.println();
-		return;
-		
 	}
 	
 	
@@ -118,15 +112,17 @@ public class Fila {
 	
 	public void diminuirCombustivel() {	
 		if(inicio == null) return;
-		
 		Nodo aux = inicio;
 
 		aux = inicio;
-
 		while(aux != null) {
-				aux.setTempo(aux.getTempo()-1); 
-				aux.setProx(aux.getProx().getProx());
-				aux = aux.getProx();
+				if(aux.getTempo() >= 1) {
+					aux.setTempo(aux.getTempo()-1); 
+					aux = aux.getProx();
+				}else {
+					System.out.println("foi de jackson five kkkk");
+					return;
+				}
 		}
 		return;
 	}
