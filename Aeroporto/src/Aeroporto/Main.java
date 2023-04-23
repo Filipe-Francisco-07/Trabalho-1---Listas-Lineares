@@ -25,12 +25,10 @@ public class Main {
 		int ID2 = 2;
 		int tempo_ar = 0;
 		int tempo_dec = 0;
-		int tempo_final_dec = 0;
-		int tempo_final_ate = 0;
 		int tempo_ate = 0;
 		int num_dec = 0;
 		int num_ate = 0;
-		int choose = 0;
+		int choose = 1;
 		
 		// supondo que a reserva seja de 5 unidades de tempo.
 		int reserva = 0;
@@ -47,34 +45,32 @@ public class Main {
 				tempo_ar = r.nextInt(1,21);
 				ID1+=2;
 				if(Aterrissagem1.getTamanho() < Aterrissagem2.getTamanho()){
-					Aterrissagem1.aterrissar(ID1,tempo_ar,tempo);
+					Aterrissagem1.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
 				}else if(Aterrissagem2.getTamanho() < Aterrissagem1.getTamanho()){
-					Aterrissagem2.aterrissar(ID1,tempo_ar,tempo);
+					Aterrissagem2.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
 				}else {
-					Aterrissagem1.aterrissar(ID1,tempo_ar,tempo);
+					Aterrissagem1.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
 				}
 			}
 			
 			entrada = r.nextInt(1,3);
 			
-			// criando de 0 a 2 entradas de aterrissagem.
+			// criando de 0 a 2 entradas de decolagem.
 			for(int i = 0; i < entrada; i++) {
-				Nodo Aviao = new Nodo();
-				Aviao.setID(ID2);
-				ID2+=2;
 				if(Decolagem1.getTamanho() < Decolagem2.getTamanho()){
-					Decolagem1.decolar(ID2,tempo);
+					Decolagem1.decolar(ID2);
 					tempo_dec += tempo;
 				}else if(Decolagem2.getTamanho() < Decolagem1.getTamanho()){
-					Decolagem2.decolar(ID2,tempo);
+					Decolagem2.decolar(ID2);
 					tempo_dec += tempo;
 				}else {
 					tempo_dec += tempo;
-					Decolagem1.decolar(ID2,tempo);
+					Decolagem1.decolar(ID2);
 				}
+				ID2+=2;
 			}		
 			
 			//diminuindo o combustivel dos avioes que estao no ceu.
@@ -82,26 +78,76 @@ public class Main {
 			Aterrissagem1.diminuirCombustivel();
 			Aterrissagem2.diminuirCombustivel();
 			
-			//mudar
-				
-			if(choose % 2 == 0) {
-				if(Aterrissagem1.qntMenor()) {
-					reserva++;
+			//removendo os avioes que decolam e aterrissam da fila.
+			
+			boolean dois = true;
+			
+			while(dois) {
+			boolean p1 = false;
+			boolean p2 = false;
+				if(choose % 2 == 0) {
+					if(!Aterrissagem1.estaVazio()) {
+						if(Aterrissagem1.qntMenor()) {
+							reserva++;
+						}				
+						Aterrissagem1.aterrissarMenor();
+						num_ate++;
+						p1 = true;
+					}else if(!Aterrissagem2.estaVazio()) {
+						if(Aterrissagem2.qntMenor()) {
+							reserva++;
+						}				
+						Aterrissagem2.aterrissarMenor();
+						num_ate++;
+						p1 = true;{
+						}
+					}
+					
+					if(!Decolagem1.estaVazio()) {				
+						Decolagem1.decolagem();
+						num_dec++;
+						p2 = true;
+					}else if(!Decolagem2.estaVazio()) {				
+						Decolagem2.decolagem();
+						num_dec++;
+						p2 = true;
+					}				
+					if(p1 && p2) {
+						dois = false;
+						break;
+					}
 				}
-				num_ate++;
-				Aterrissagem1.aterrissarMenor();
-				num_dec++;
-				Decolagem1.decolar();
-			}else {
-				if(Aterrissagem2.qntMenor()) {
-					reserva++;
+				if(choose % 2 != 0) {
+					if(!Aterrissagem2.estaVazio()) {
+						if(Aterrissagem2.qntMenor()) {
+							reserva++;
+						}				
+						Aterrissagem2.aterrissarMenor();
+						num_ate++;
+						p1 = true;
+					}else if(!Aterrissagem1.estaVazio()) {
+						if(Aterrissagem1.qntMenor()) {
+							reserva++;
+						}				
+						Aterrissagem1.aterrissarMenor();
+						num_ate++;
+						p1 = true;
+					}
+					if(!Decolagem2.estaVazio()) {				
+						Decolagem2.decolagem();
+						num_dec++;
+						p2 = true;
+					}else if(!Decolagem1.estaVazio()) {
+						Decolagem1.decolagem();
+						num_dec++;
+						p2 = true;
+					}
+					if(p1 && p2) {
+						dois = false;
+						break;
+					}
 				}
-				num_ate++;
-				Aterrissagem2.aterrissarMenor();
-				num_dec++;
-				Decolagem2.decolar();
 			}
-	
 			//mostrando o conteudo das listas
 			
 			System.out.println("Lista de aterrissagem 1:");
@@ -120,10 +166,9 @@ public class Main {
 			//opcao de refazer o looping ou terminar.
 			
 			if(opt == 1) {
-				tempo_final_ate = (tempo_ate- tempo);
-				tempo_final_dec = (tempo_dec - tempo);				
-				System.out.println("Tempo médio de espera para decolagem: "+(tempo_final_dec/num_dec));
-				System.out.println("Tempo médio de espera para aterrissagem: "+(tempo_final_ate/num_ate));
+			
+				System.out.println("Tempo médio de espera para decolagem: "+(tempo_dec/num_dec));
+				System.out.println("Tempo médio de espera para aterrissagem: "+(tempo_ate/num_ate));
 				System.out.println("Fim do programa.");
 				
 				vai = false;

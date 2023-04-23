@@ -31,9 +31,9 @@ public class Fila {
 		return tamanho;
 	}
 	
-	public void aterrissar(int ID, int tempo_ar, int tempo_entrada) {
+	public void aterrissar(int ID, int tempo_ar) {
 		if(temEspaco()) {
-			Nodo Aviao = new Nodo(ID, tempo_ar,tempo_entrada);
+			Nodo Aviao = new Nodo(ID, tempo_ar);
 			if(estaVazio()) {
 				inicio = Aviao;
 				fim = Aviao;
@@ -48,9 +48,9 @@ public class Fila {
 		}
 	}
 	
-	public void decolar(int ID, int tempo_entrada) {
+	public void decolar(int ID) {
 		if(temEspaco()) {
-			Nodo Aviao = new Nodo(ID,tempo_entrada);
+			Nodo Aviao = new Nodo(ID);
 			if(estaVazio()) {
 				inicio = Aviao;
 				fim = Aviao;
@@ -93,7 +93,7 @@ public class Fila {
 	}
 	
 	
-	public void decolar() {
+	public void decolagem() {
         if(estaVazio()) {
             return;
         }
@@ -116,13 +116,11 @@ public class Fila {
 
 		aux = inicio;
 		while(aux != null) {
-				if(aux.getTempo() >= 1) {
-					aux.setTempo(aux.getTempo()-1); 
-					aux = aux.getProx();
-				}else {
-					System.out.println("foi de jackson five kkkk");
-					return;
-				}
+			if(aux.getTempo() >= 1) {
+				aux.setTempo(aux.getTempo()-1); 
+			}
+			aux = aux.getProx();
+
 		}
 		return;
 	}
@@ -143,7 +141,6 @@ public class Fila {
 		}
 		return false;
 	}
-	
 	public void aterrissarMenor() {
 		int menor = 21;
 		
