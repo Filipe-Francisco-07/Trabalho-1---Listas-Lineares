@@ -31,24 +31,6 @@ public class Pista {
 			return -1;
 		}
 	}
-	public void entrarAterrissagem1(Nodo Aviao, Fila fila) {
-		fila.aterrissar1(Aviao);
-		return;
-	}
-	public void entrarAterrissagem2(Nodo Aviao, Fila fila) {
-		fila.aterrissar2(Aviao);
-		return;
-	}
-	
-	public void entrarDecolagem1(Nodo Aviao, Fila fila) {
-		fila.decolar1(Aviao);
-		return;
-	}
-	
-	public void entrarDecolagem2(Nodo Aviao, Fila fila) {
-		fila.decolar2(Aviao);
-		return;
-	}
 	
 	public Integer remover() {
 		if(estaVazio()) {

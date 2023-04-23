@@ -14,9 +14,6 @@ public class Main {
 		int desc_tempo = 0;
 		boolean vai = true;
 		
-		Pista Pista1 = new Pista();
-		Pista Pista2 = new Pista();
-		
 		Fila Aterrissagem1 = new Fila();
 		Fila Aterrissagem2 = new Fila();
 		
@@ -38,22 +35,19 @@ public class Main {
 			tempo++;
 			desc_tempo--;
 			
-			entrada = r.nextInt(0,3);
-			pista = r.nextInt(0,3);
+			entrada = r.nextInt(1,3);
+			pista = r.nextInt(1,3);
 			
 			System.out.println("tempo: "+tempo);
 			
 			// criando de 0 a 2 entradas de aterrissagem.
 			for(int i = 0; i < entrada; i++) {
-				Nodo Aviao = new Nodo();
-				tempo_ar = 3;
-				Aviao.setID(ID1);
-				Aviao.setTempo(tempo_ar);
+				tempo_ar = r.nextInt(1,20);
 				ID1+=2;
 				if(pista == 1) {
-					Aterrissagem1.aterrissar1(Aviao);
+					Aterrissagem1.aterrissar(ID1,tempo_ar);
 				}else {
-					Aterrissagem2.aterrissar2(Aviao);
+					Aterrissagem2.aterrissar(ID1,tempo_ar);
 				}
 			}
 			
@@ -64,46 +58,83 @@ public class Main {
 				Aviao.setID(ID2);
 				ID2+=2;
 				if(pista == 1) {
-					Decolagem1.decolar1(Aviao);
+					Decolagem1.decolar(ID2);
 				}else {
-					Decolagem2.decolar2(Aviao);
+					Decolagem2.decolar(ID2);
 				}
 			}
-			
-			System.out.println(choose);
-			
-			if(choose % 2 == 0) {
+			// ok ate aq		
+		
+			if(!Aterrissagem1.estaVazio() && !Decolagem1.estaVazio()) {
 				if(Aterrissagem1.qntMenor()) {
 					reserva++;
 				}
 				Aterrissagem1.aterrissarMenor();
 				Decolagem1.decolar();	
-			}else {
+			}else if(!Aterrissagem2.estaVazio() && !Decolagem2.estaVazio()){					
 				if(Aterrissagem2.qntMenor()) {
 					reserva++;
 				}
 				Aterrissagem2.aterrissarMenor();
 				Decolagem2.decolar();
+			}else if(!Aterrissagem1.estaVazio() && !Decolagem2.estaVazio()) {
+				if(Aterrissagem1.qntMenor()) {
+					reserva++;
+				}
+				Aterrissagem1.aterrissarMenor();
+				Decolagem2.decolar();
+			}else if(!Aterrissagem2.estaVazio() && !Decolagem1.estaVazio()) {
+				if(Aterrissagem2.qntMenor()) {
+				reserva++;
+				}
+				Aterrissagem2.aterrissarMenor();
+				Decolagem1.decolar();	
+			}else if (!Aterrissagem1.estaVazio() && Decolagem1.estaVazio()){
+				if(Aterrissagem1.qntMenor()) {
+				reserva++;
+				}
+				Aterrissagem1.aterrissarMenor();
+			}else if (!Aterrissagem2.estaVazio() && Decolagem1.estaVazio()){
+				if(Aterrissagem2.qntMenor()) {
+				reserva++;
+				}
+				Aterrissagem2.aterrissarMenor();
+			}else if (!Aterrissagem1.estaVazio() && Decolagem2.estaVazio()){
+				if(Aterrissagem1.qntMenor()) {
+				reserva++;
+				}
+				Aterrissagem1.aterrissarMenor();
+			}else if (!Aterrissagem2.estaVazio() && Decolagem2.estaVazio()){
+				if(Aterrissagem2.qntMenor()) {
+				reserva++;
+				}
+				Aterrissagem2.aterrissarMenor();
+			}else if (!Decolagem1.estaVazio() && Aterrissagem1.estaVazio()){
+				Decolagem1.decolar();	
+			}else if (!Decolagem2.estaVazio() && Aterrissagem1.estaVazio()){
+				Decolagem2.decolar();	
+			}else if (!Decolagem1.estaVazio() && Aterrissagem2.estaVazio()){
+				Decolagem1.decolar();	
+			}else if (!Decolagem2.estaVazio() && Aterrissagem2.estaVazio()){
+				Decolagem2.decolar();	
 			}
+				
 			
-			//Aterrissagem1.mostraListaA();
-			//Aterrissagem2.mostraListaA();
-			//Decolagem1.mostraListaD();
-			//Decolagem2.mostraListaD();
-			
+			System.out.println("Lista de aterrissagem 1:");
+			Aterrissagem1.mostraListaA();
+			System.out.println("Lista de aterrissagem 2:");
+			Aterrissagem2.mostraListaA();
+			System.out.println("Lista de decolagem 1:");
+			Decolagem1.mostraListaD();
+			System.out.println("Lista de decolagem 2:");
+			Decolagem2.mostraListaD();
+			System.out.println("Aviões que pousaram na reserva: "+reserva);
+				
 			System.out.println("Digite 1 para parar ou qualquer coisa para continuar. ");
 			int opt = input.nextInt();
 				
 			if(opt == 1) {
-				System.out.println("Lista de aterrissagem 1:");
-				Aterrissagem1.mostraListaA();
-				System.out.println("Lista de aterrissagem 2:");
-				Aterrissagem2.mostraListaA();
-				System.out.println("Lista de decolagem 1:");
-				Decolagem1.mostraListaD();
-				System.out.println("Lista de decolagem 2:");
-				Decolagem2.mostraListaD();
-				System.out.println("Aviões que pousaram na reserva: "+reserva);
+				System.out.println("Fim do programa. :(");
 				vai = false;
 			}
 		}	
@@ -141,10 +172,7 @@ public class Main {
 
 		input.close();
 		}
-	
-	
-	
-					
+						
 		/*A cada unidade de tempo, de zero a duas aeronaves podem chegar às filas de decolagem, e de
 zero a duas aeronaves podem chegar às prateleiras. A cada unidade de tempo cada pista pode
 ser usada para um pouso ou uma decolagem. Se alguma(s) aeronaves estiverem com falta de

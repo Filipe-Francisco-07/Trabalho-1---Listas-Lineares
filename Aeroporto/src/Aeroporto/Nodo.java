@@ -23,6 +23,12 @@ public class Nodo {
 		this.Prox = null;
 	}
 	
+	public Nodo(int ID, int tempo) {
+		this.ID = ID;
+		this.tempo = tempo;
+		this.Prox = null;
+	}
+	
 	public int getID() {
 		return ID;
 	}

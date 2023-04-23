@@ -5,7 +5,7 @@ import java.util.Random;
 public class Fila {
 	private Nodo inicio = null;
 	private Nodo fim;
-	private int limite = 100;
+	private int limite = 20;
 	private int tamanho = 0;
 	private int ID1 = 1;
 	private int ID2 = 2;
@@ -30,23 +30,26 @@ public class Fila {
 		}
 	}
 	
-	public void inserir(int dado) {
+	public void aterrissar(int ID, int tempo_ar) {
 		if(temEspaco()) {
-			Nodo novo = new Nodo(dado);
+			Nodo Aviao = new Nodo(ID, tempo_ar);
 			if(estaVazio()) {
-				inicio = novo;
-				fim = novo;
+				inicio = Aviao;
+				fim = Aviao;
 			}else {
-				fim.setProx(novo);
-				fim = novo;
+				fim.setProx(Aviao);
+				fim = Aviao;
 			}
 			tamanho++;
+			System.out.println("Avião de ID: "+Aviao.getID()+" Combustivel: "+Aviao.getTempo()+" entrou na fila de aterrissagem.");
 		}else {
-			System.out.println("Fila cheia!");
+			System.out.println("Fila de aterrissagem cheia!");
 		}
 	}
 	
-	public void aterrissar1(Nodo Aviao) {
+	public void decolar(int ID) {
+		if(temEspaco()) {
+			Nodo Aviao = new Nodo(ID);
 			if(estaVazio()) {
 				inicio = Aviao;
 				fim = Aviao;
@@ -55,44 +58,10 @@ public class Fila {
 				fim = Aviao;
 			}
 			tamanho++;
-			System.out.println("Avião de ID: "+Aviao.getID()+" e Combustível: "+Aviao.getTempo()+" entrou na fila de aterrissagem 1.");
-	}
-	
-	public void aterrissar2(Nodo Aviao) {
-			if(estaVazio()) {
-				inicio = Aviao;
-				fim = Aviao;
-			}else {
-				fim.setProx(Aviao);
-				fim = Aviao;
-			}
-			tamanho++;
-			System.out.println("Avião de ID: "+Aviao.getID()+" e Combustível: "+Aviao.getTempo()+" entrou na fila de aterrissagem 2.");
-	}
-	
-	public void decolar1(Nodo Aviao) {
-
-			if(estaVazio()) {
-				inicio = Aviao;
-				fim = Aviao;
-			}else {
-				fim.setProx(Aviao);
-				fim = Aviao;
-			}
-			tamanho++;
-			System.out.println("Avião de ID: "+Aviao.getID()+" entrou na fila de decolagem 1.");
-	}
-	
-	public void decolar2(Nodo Aviao) {
-			if(estaVazio()) {
-				inicio = Aviao;
-				fim = Aviao;
-			}else {
-				fim.setProx(Aviao);
-				fim = Aviao;
-			}
-			tamanho++;
-			System.out.println("Avião de ID: "+Aviao.getID()+" entrou na fila de decolagem 2.");
+			System.out.println("Avião de ID: "+Aviao.getID()+" entrou na fila de decolagem.");
+		}else {
+			System.out.println("Fila de decolagem cheia!");
+		}
 	}
 	
 	public Integer remover() {
@@ -129,26 +98,23 @@ public class Fila {
 		
 	}
 	
+	
 	public void decolar() {
-		
-		if(estaVazio()) {
-			return;
-		}
-		
-		Nodo aux = inicio;
-		if(aux != null){
-				aux = aux.getProx();
-				tamanho--;
-				System.out.println("Aviao decolou.");
-				
-				return;
-		}
-		if(estaVazio()) {
-			fim = null;
-			return;
-		}
-		return;
-		}
+        if(estaVazio()) {
+            return;
+        }
+        if(inicio != null) {
+        	inicio = inicio.getProx();
+        	tamanho--;
+        }
+        if(estaVazio()) {
+            fim = null;
+        }
+        System.out.println("Aviao decolou.");
+        return;
+    }
+	
+	
 	
 	public void diminuirCombustivel() {	
 		if(inicio == null) return;
@@ -183,34 +149,41 @@ public class Fila {
 	}
 	
 	public void aterrissarMenor() {
-
-		int menor = 100;
-	
-		if(inicio == null) return;
+		int menor = 21;
 		
-		Nodo aux = inicio;
-				
+	    if (estaVazio()) {
+	        return;
+	    }
+	    
+	    Nodo aux = inicio;
 		while(aux != null) {
 			if(aux.getTempo() < menor) {
 				menor = aux.getTempo();
 			}
 			aux = aux.getProx();
 		}
-		aux = inicio;
 		
-		if(aux.getTempo() == menor) {
-			aux = aux.getProx();	
-			return;
-		}
-
-		while(aux != null) {
-			if(aux.getProx().getTempo()==menor) {
-				aux.setProx(aux.getProx().getProx());
-				System.out.println("Avião de menor combustível aterrissou.");
-				return;
-			}
-			aux = aux.getProx();
-		}
+	    Nodo anterior = null;
+	    Nodo atual = inicio;
+	    Nodo menorNodo = inicio;
+	    while (atual != null) {
+	        if (atual.getTempo() < menorNodo.getTempo() && atual.getTempo() == menor) {
+	            menorNodo = atual;
+	        }
+	        anterior = atual;
+	        atual = atual.getProx();
+	    }
+	    if (menorNodo == inicio) {
+	        inicio = inicio.getProx();
+	    } else {
+	        anterior.setProx(menorNodo.getProx());
+	    }
+	    tamanho--;
+	    if (estaVazio()) {
+	        fim = null;
+	    }
+	    System.out.println("Avião de combustível "+menor+" aterrissou.");
+	    return;
 	}
 	
 }
