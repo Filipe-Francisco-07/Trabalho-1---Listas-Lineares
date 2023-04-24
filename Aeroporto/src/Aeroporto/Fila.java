@@ -3,7 +3,7 @@ package Aeroporto;
 public class Fila {
 	private Nodo inicio = null;
 	private Nodo fim;
-	private int limite = 100000;
+	private int limite = 100;
 	private int tamanho = 0;
 
 	

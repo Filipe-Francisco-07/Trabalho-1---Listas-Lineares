@@ -41,37 +41,50 @@ public class Main {
 			System.out.println("tempo: "+tempo);
 			
 			// criando de 0 a 2 entradas de aterrissagem.
-			for(int i = 0; i < entrada; i++) {
-				tempo_ar = r.nextInt(5,21);
-				if(Aterrissagem1.getTamanho() < Aterrissagem2.getTamanho()){
-					Aterrissagem1.aterrissar(ID1,tempo_ar);
-					tempo_ate += tempo;
-				}else if(Aterrissagem2.getTamanho() < Aterrissagem1.getTamanho()){
+	
+
+			tempo_ar = r.nextInt(8,21);
+			if(entrada == 1) {			
+				if(Aterrissagem2.getTamanho() < Aterrissagem1.getTamanho()) {
 					Aterrissagem2.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
+					ID1+=2;
 				}else {
 					Aterrissagem1.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
+					ID1+=2;
 				}
+			}else if(entrada == 2){
+				Aterrissagem1.aterrissar(ID1,tempo_ar);
+				tempo_ate += tempo;
+				ID1+=2;
+				Aterrissagem2.aterrissar(ID1,tempo_ar);
+				tempo_ate += tempo;
 				ID1+=2;
 			}
 			
 			entrada = r.nextInt(1,3);
 			
 			// criando de 0 a 2 entradas de decolagem.
-			for(int i = 0; i < entrada; i++) {
-				if(Decolagem1.getTamanho() < Decolagem2.getTamanho()){
-					Decolagem1.decolar(ID2);
-					tempo_dec += tempo;
-				}else if(Decolagem2.getTamanho() < Decolagem1.getTamanho()){
+			if(entrada == 1) {
+				if(Decolagem2.getTamanho() < Decolagem1.getTamanho()) {
 					Decolagem2.decolar(ID2);
 					tempo_dec += tempo;
-				}else {
-					tempo_dec += tempo;
+					ID2+=2;
+				}else{
 					Decolagem1.decolar(ID2);
+					tempo_dec += tempo;
+					ID2+=2;
 				}
+			}else if(entrada == 2){
+				Decolagem1.decolar(ID2);
+				tempo_dec += tempo;
 				ID2+=2;
-			}		
+				Decolagem2.decolar(ID2);
+				tempo_dec += tempo;
+				ID2+=2;
+			}
+		
 			
 			//diminuindo o combustivel dos avioes que estao no ceu.
 			
