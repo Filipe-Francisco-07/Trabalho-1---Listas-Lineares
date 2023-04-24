@@ -129,7 +129,7 @@ public class Fila {
 		return;
 	}
 	
-	public boolean qntMenor() {	
+	public int qntMenor() {	
 		int menor = 21;
 		
 		Nodo aux = inicio;
@@ -139,11 +139,7 @@ public class Fila {
 			}
 			aux = aux.getProx();
 		}
-		
-		if(menor <= 5) {
-			return true;
-		}
-		return false;
+		return menor;
 	}
 	public void aterrissarMenor() {
 		int menor = 21;

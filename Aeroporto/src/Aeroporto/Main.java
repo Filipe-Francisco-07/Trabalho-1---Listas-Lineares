@@ -28,13 +28,11 @@ public class Main {
 		int tempo_ate = 0;
 		int num_dec = 0;
 		int num_ate = 0;
-		int choose = 1;
 		
 		// supondo que a reserva seja de 5 unidades de tempo.
 		int reserva = 0;
 		
 		while (vai) {
-			choose++;
 			tempo++;	
 			entrada = r.nextInt(1,3);
 			
@@ -105,69 +103,55 @@ public class Main {
 			while(dois) {
 			boolean p1 = false;
 			boolean p2 = false;
-				if(choose % 2 == 0) {
-					if(!Aterrissagem1.estaVazio()) {
-						if(Aterrissagem1.qntMenor()) {
+				if(!Aterrissagem1.estaVazio()) {
+					if(Aterrissagem1.qntMenor() < Aterrissagem2.qntMenor()) {
+						if(Aterrissagem1.qntMenor() <= 5) {
 							reserva++;
-						}				
-						Aterrissagem1.aterrissarMenor();
-						num_ate++;
-						p1 = true;
-					}else if(!Aterrissagem2.estaVazio()) {
-						if(Aterrissagem2.qntMenor()) {
-							reserva++;
-						}				
-						Aterrissagem2.aterrissarMenor();
-						num_ate++;
-						p1 = true;{
 						}
-					}
-					
-					if(!Decolagem1.estaVazio()) {				
-						Decolagem1.decolagem();
-						num_dec++;
-						p2 = true;
-					}else if(!Decolagem2.estaVazio()) {				
-						Decolagem2.decolagem();
-						num_dec++;
-						p2 = true;
-					}				
-					if(p1 && p2) {
-						dois = false;
-						break;
-					}
-				}
-				if(choose % 2 != 0) {
-					if(!Decolagem2.estaVazio()) {				
-						Decolagem2.decolagem();
-						num_dec++;
-						p2 = true;
-					}else if(!Decolagem1.estaVazio()) {
-						Decolagem1.decolagem();
-						num_dec++;
-						p2 = true;
-					}
-					if(!Aterrissagem2.estaVazio()) {
-						if(Aterrissagem2.qntMenor()) {
-							reserva++;
-						}				
-						Aterrissagem2.aterrissarMenor();
-						num_ate++;
-						p1 = true;
-					}else if(!Aterrissagem1.estaVazio()) {
-						if(Aterrissagem1.qntMenor()) {
-							reserva++;
-						}				
 						Aterrissagem1.aterrissarMenor();
 						num_ate++;
 						p1 = true;
+					}else {
+						if(Aterrissagem2.qntMenor() <= 5) {
+							reserva++;
+						}
+						Aterrissagem2.aterrissarMenor();
+						num_ate++;
+						p1 = true;						
 					}
-					if(p1 && p2) {
-						dois = false;
-						break;
-					}
+				}else if(!Aterrissagem2.estaVazio()) {
+						if(Aterrissagem2.qntMenor() < Aterrissagem1.qntMenor()) {
+							if(Aterrissagem2.qntMenor() <= 5) {
+								reserva++;
+							}
+							Aterrissagem2.aterrissarMenor();
+							num_ate++;
+							p1 = true;
+						}else {
+							if(Aterrissagem1.qntMenor() <= 5) {
+								reserva++;
+							}								
+							Aterrissagem1.aterrissarMenor();
+							num_ate++;
+							p1 = true;
+						}
+				}	
+				if(Decolagem1.getTamanho() > Decolagem2.getTamanho()) {
+					Decolagem1.decolagem();
+					num_dec++;
+					p2 = true;
+				}else {
+					Decolagem2.decolagem();
+					num_dec++;
+					p2 = true;
+				}
+				if(p1 && p2) {
+					dois = false;
+					break;
 				}
 			}
+			//g
+			
 			//mostrando o conteudo das listas
 			
 			System.out.println("Lista de aterrissagem 1:");
@@ -192,9 +176,8 @@ public class Main {
 				System.out.println("Fim do programa.");			
 				vai = false;
 			}
-		}	
-
+		}
 		input.close();
-
 	}
+		
 }
