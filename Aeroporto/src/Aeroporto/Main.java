@@ -49,18 +49,24 @@ public class Main {
 					Aterrissagem2.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
 					ID1+=2;
+					tempo_ar = r.nextInt(8,21);
 				}else {
 					Aterrissagem1.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
 					ID1+=2;
+					tempo_ar = r.nextInt(8,21);
 				}
 			}else if(entrada == 2){
 				Aterrissagem1.aterrissar(ID1,tempo_ar);
 				tempo_ate += tempo;
 				ID1+=2;
+				tempo_ar = r.nextInt(8,21);
 				Aterrissagem2.aterrissar(ID1,tempo_ar);
 				tempo_ate += tempo;
 				ID1+=2;
+				tempo_ar = r.nextInt(8,21);
+			}else {
+				System.out.println("Sem aterrissagens no tempo "+tempo);
 			}
 			
 			entrada = r.nextInt(1,3);
@@ -83,9 +89,10 @@ public class Main {
 				Decolagem2.decolar(ID2);
 				tempo_dec += tempo;
 				ID2+=2;
+			}else {
+				System.out.println("Sem decolagens no tempo "+tempo);
 			}
 		
-			
 			//diminuindo o combustivel dos avioes que estao no ceu.
 			
 			Aterrissagem1.diminuirCombustivel();

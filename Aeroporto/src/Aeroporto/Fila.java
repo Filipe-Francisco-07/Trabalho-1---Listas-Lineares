@@ -163,8 +163,10 @@ public class Fila {
 	    Nodo anterior = null;
 	    Nodo atual = inicio;
 	    Nodo menorNodo = inicio;
+	    menorNodo.setTempo(menor);
+	    
 	    while (atual != null) {
-	        if (atual.getTempo() < menorNodo.getTempo() && atual.getTempo() == menor) {
+	        if (atual.getTempo() < menorNodo.getTempo()) {
 	            menorNodo = atual;
 	        }
 	        anterior = atual;
@@ -172,15 +174,16 @@ public class Fila {
 	    }
 	    if (menorNodo == inicio) {
 	        inicio = inicio.getProx();
+	        System.out.println("Aviao de combustível "+menor+" aterrissou.");
 	    } else {
 	        anterior.setProx(menorNodo.getProx());
+	        System.out.println("Aviao de combustível "+menor+" aterrissou.");
 	    }
 	    tamanho--;
 	    if (estaVazio()) {
 	        fim = null;
 	    }
-	    System.out.println("Aviao de combustível "+menor+" aterrissou.");
-	    return;
+
 	}
 	
 }
