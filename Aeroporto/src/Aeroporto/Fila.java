@@ -3,7 +3,7 @@ package Aeroporto;
 public class Fila {
 	private Nodo inicio = null;
 	private Nodo fim;
-	private int limite = 10;
+	private int limite = 100000;
 	private int tamanho = 0;
 
 	
@@ -22,7 +22,7 @@ public class Fila {
 		if(!estaVazio()) {
 			return inicio.getID();
 		}else {
-			System.out.println("Fila está vazia!");
+			System.out.println("Fila esta vazia!");
 			return -1;
 		}
 	}
@@ -42,7 +42,7 @@ public class Fila {
 				fim = Aviao;
 			}
 			tamanho++;
-			System.out.println("Avião de ID: "+Aviao.getID()+" Combustivel: "+Aviao.getTempo()+" entrou na fila de aterrissagem.");
+			System.out.println("Aviao de ID: "+Aviao.getID()+" Combustivel: "+Aviao.getTempo()+" entrou na fila de aterrissagem.");
 		}else {
 			System.out.println("Fila de aterrissagem cheia!");
 		}
@@ -70,12 +70,11 @@ public class Fila {
 	        System.out.println("A fila está vazia.");
 	        return;
 	    }
-	    
 	    Nodo atual = inicio;
-	    
-	    while (atual != null) {
+
+	    while (atual != null ) {
 	        System.out.println("ID: "+atual.getID()+ " Combustível: "+atual.getTempo() );
-	        atual = atual.getProx();
+	        atual = atual.getProx();	       	        	   	         
 	    }
 	}
 	

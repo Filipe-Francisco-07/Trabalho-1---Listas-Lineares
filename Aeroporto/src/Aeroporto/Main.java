@@ -42,7 +42,7 @@ public class Main {
 			
 			// criando de 0 a 2 entradas de aterrissagem.
 			for(int i = 0; i < entrada; i++) {
-				tempo_ar = r.nextInt(1,21);
+				tempo_ar = r.nextInt(5,21);
 				ID1+=2;
 				if(Aterrissagem1.getTamanho() < Aterrissagem2.getTamanho()){
 					Aterrissagem1.aterrissar(ID1,tempo_ar);
@@ -152,25 +152,24 @@ public class Main {
 			
 			System.out.println("Lista de aterrissagem 1:");
 			Aterrissagem1.mostraListaA();
-			System.out.println("Lista de aterrissagem 2:");
-			Aterrissagem2.mostraListaA();
 			System.out.println("Lista de decolagem 1:");
 			Decolagem1.mostraListaD();
+			System.out.println("Lista de aterrissagem 2:");
+			Aterrissagem2.mostraListaA();
 			System.out.println("Lista de decolagem 2:");
 			Decolagem2.mostraListaD();
 			System.out.println("Aviões que pousaram na reserva: "+reserva);
-				
+			System.out.println("Tempo médio de espera para decolagem: "+(tempo_dec/num_dec));
+			System.out.println("Tempo médio de espera para aterrissagem: "+(tempo_ate/num_ate));
+			System.out.println();
 			System.out.println("Digite 1 para parar ou qualquer coisa para continuar. ");
 			int opt = input.nextInt();
+	
 				
 			//opcao de refazer o looping ou terminar.
 			
 			if(opt == 1) {
-			
-				System.out.println("Tempo médio de espera para decolagem: "+(tempo_dec/num_dec));
-				System.out.println("Tempo médio de espera para aterrissagem: "+(tempo_ate/num_ate));
-				System.out.println("Fim do programa.");
-				
+				System.out.println("Fim do programa.");			
 				vai = false;
 			}
 		}	
