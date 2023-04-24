@@ -43,7 +43,6 @@ public class Main {
 			// criando de 0 a 2 entradas de aterrissagem.
 			for(int i = 0; i < entrada; i++) {
 				tempo_ar = r.nextInt(5,21);
-				ID1+=2;
 				if(Aterrissagem1.getTamanho() < Aterrissagem2.getTamanho()){
 					Aterrissagem1.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
@@ -54,6 +53,7 @@ public class Main {
 					Aterrissagem1.aterrissar(ID1,tempo_ar);
 					tempo_ate += tempo;
 				}
+				ID1+=2;
 			}
 			
 			entrada = r.nextInt(1,3);
@@ -78,7 +78,7 @@ public class Main {
 			Aterrissagem1.diminuirCombustivel();
 			Aterrissagem2.diminuirCombustivel();
 			
-			//removendo os avioes que decolam e aterrissam da fila.
+			//removendo os avioes que decolam e aterrissam da fila (1 de cada a cada unidade de tempo).
 			
 			boolean dois = true;
 			
@@ -118,6 +118,15 @@ public class Main {
 					}
 				}
 				if(choose % 2 != 0) {
+					if(!Decolagem2.estaVazio()) {				
+						Decolagem2.decolagem();
+						num_dec++;
+						p2 = true;
+					}else if(!Decolagem1.estaVazio()) {
+						Decolagem1.decolagem();
+						num_dec++;
+						p2 = true;
+					}
 					if(!Aterrissagem2.estaVazio()) {
 						if(Aterrissagem2.qntMenor()) {
 							reserva++;
@@ -132,15 +141,6 @@ public class Main {
 						Aterrissagem1.aterrissarMenor();
 						num_ate++;
 						p1 = true;
-					}
-					if(!Decolagem2.estaVazio()) {				
-						Decolagem2.decolagem();
-						num_dec++;
-						p2 = true;
-					}else if(!Decolagem1.estaVazio()) {
-						Decolagem1.decolagem();
-						num_dec++;
-						p2 = true;
 					}
 					if(p1 && p2) {
 						dois = false;
@@ -158,9 +158,9 @@ public class Main {
 			Aterrissagem2.mostraListaA();
 			System.out.println("Lista de decolagem 2:");
 			Decolagem2.mostraListaD();
-			System.out.println("Aviões que pousaram na reserva: "+reserva);
-			System.out.println("Tempo médio de espera para decolagem: "+(tempo_dec/num_dec));
-			System.out.println("Tempo médio de espera para aterrissagem: "+(tempo_ate/num_ate));
+			System.out.println("Avioes que pousaram na reserva: "+reserva);
+			System.out.println("Tempo medio de espera para decolagem: "+(tempo_dec/num_dec));
+			System.out.println("Tempo medio de espera para aterrissagem: "+(tempo_ate/num_ate));
 			System.out.println();
 			System.out.println("Digite 1 para parar ou qualquer coisa para continuar. ");
 			int opt = input.nextInt();

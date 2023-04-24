@@ -59,7 +59,7 @@ public class Fila {
 				fim = Aviao;
 			}
 			tamanho++;
-			System.out.println("Avião de ID: "+Aviao.getID()+" entrou na fila de decolagem.");
+			System.out.println("Aviao de ID: "+Aviao.getID()+" entrou na fila de decolagem.");
 		}else {
 			System.out.println("Fila de decolagem cheia!");
 		}
@@ -67,26 +67,31 @@ public class Fila {
 	
 	public void mostraListaA() {
 	    if (inicio == null) {
-	        System.out.println("A fila está vazia.");
+	        System.out.println("A fila esta vazia.");
 	        return;
 	    }
 	    Nodo atual = inicio;
-
 	    while (atual != null ) {
-	        System.out.println("ID: "+atual.getID()+ " Combustível: "+atual.getTempo() );
-	        atual = atual.getProx();	       	        	   	         
-	    }
+	        System.out.println("ID: "+atual.getID()+ " Combustivel: "+atual.getTempo() );
+	        if(atual == fim) {
+	        	break;
+	        }
+	        atual = atual.getProx();
+	        }
 	}
 	
 	public void mostraListaD() {
 		if (inicio == null) {
-		    System.out.println("A fila está vazia.");
+		    System.out.println("A fila esta vazia.");
 		    return;
 		}    
 		Nodo atual = inicio;
 		    
 		while (atual != null) {
 		    System.out.println("ID: "+atual.getID());
+		    if(atual == fim) {
+	        	break;
+	        }
 		    atual = atual.getProx();
 		}
 	}
@@ -174,7 +179,7 @@ public class Fila {
 	    if (estaVazio()) {
 	        fim = null;
 	    }
-	    System.out.println("Avião de combustível "+menor+" aterrissou.");
+	    System.out.println("Aviao de combustível "+menor+" aterrissou.");
 	    return;
 	}
 	
